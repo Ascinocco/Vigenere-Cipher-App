@@ -11773,6 +11773,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 // this code is bad, do not do this ever
 // lazzzzy
@@ -11798,8 +11802,17 @@ const { encrypt, decrypt } = __webpack_require__(84);
 
     methods: {
         encrypt() {
-            this.encryptedMessage = encrypt(this.message, this.passphrase);
-            this.showEncryptedMessage = true;
+
+            if (this.message.length >= 20 && this.message.length <= 60) {
+                if (this.passphrase.length >= 5 && this.passphrase.length <= 10) {
+                    this.encryptedMessage = encrypt(this.message, this.passphrase);
+                    this.showEncryptedMessage = true;
+                } else {
+                    alert('Passphrase must be between 5 and 10 characters');
+                }
+            } else {
+                alert('Message must be between 20 and 60 characters');
+            }
         },
         decrypt() {
             this.decryptedMessage = decrypt(this.decryptMessage, this.decryptPassphrase);
@@ -11814,6 +11827,20 @@ const { encrypt, decrypt } = __webpack_require__(84);
         showDecrypt() {
             this.encryptSelected = false;
             this.decryptSelected = true;
+        },
+
+        clearEncrypt() {
+            this.message = '';
+            this.passphrase = '';
+            this.encryptedMessage = '';
+            this.showEncryptedMessage = false;
+        },
+
+        clearDecrypt() {
+            this.decryptMessage = '';
+            this.decryptedMessage = '';
+            this.decryptPassphrase = '';
+            this.showDecryptedMessage = false;
         }
     },
 
@@ -14159,7 +14186,7 @@ exports = module.exports = __webpack_require__(49)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -18090,7 +18117,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showDecrypt()
       }
     }
-  }, [_vm._v("Decrypt")])]), _vm._v(" "), (_vm.encryptSelected) ? _c('div', [_c('br'), _vm._v(" "), _c('h1', [_vm._v("Encrypt!")]), _vm._v(" "), _c('div', [_c('label', {
+  }, [_vm._v("Decrypt")])]), _vm._v(" "), (_vm.encryptSelected) ? _c('div', [_c('br'), _vm._v(" "), _c('h1', [_vm._v("Encrypt!")]), _vm._v(" "), _c('button', {
+    on: {
+      "click": function($event) {
+        _vm.clearEncrypt()
+      }
+    }
+  }, [_vm._v("Clear All")]), _vm._v(" "), _c('div', [_c('label', {
     attrs: {
       "for": "passphrase"
     }
@@ -18133,7 +18166,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "required": "required",
       "placeholder": "Enter your message",
       "rows": "5",
-      "cols": "50"
+      "cols": "50",
+      "maxlength": "60"
     },
     domProps: {
       "value": (_vm.message)
@@ -18176,7 +18210,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.encryptedMessage = $event.target.value
       }
     }
-  })]) : _vm._e()]) : (_vm.decryptSelected) ? _c('div', [_c('br'), _vm._v(" "), _c('h1', [_vm._v("Decrypt!")]), _vm._v(" "), _c('div', [_c('label', {
+  })]) : _vm._e()]) : (_vm.decryptSelected) ? _c('div', [_c('br'), _vm._v(" "), _c('h1', [_vm._v("Decrypt!")]), _vm._v(" "), _c('button', {
+    on: {
+      "click": function($event) {
+        _vm.clearDecrypt()
+      }
+    }
+  }, [_vm._v("Clear All")]), _vm._v(" "), _c('div', [_c('label', {
     attrs: {
       "for": "decryptPassphrase"
     }

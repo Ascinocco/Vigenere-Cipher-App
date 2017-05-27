@@ -19,6 +19,8 @@
             <br>
 
             <h1>Encrypt!</h1>
+
+            <button v-on:click="clearEncrypt()">Clear All</button>
             <div>
                 <label for="passphrase">Passphrase:</label>
                 <input type="password" id="passphrase" name="passphrase" required="required" v-model="passphrase">
@@ -28,7 +30,7 @@
             <div>
                 <label for="message">Message:</label>
                 <br>
-                <textarea id="message" name="message" required="required" placeholder="Enter your message" rows="5" cols="50" v-model="message"></textarea>
+                <textarea id="message" name="message" required="required" placeholder="Enter your message" rows="5" cols="50" maxlength="60" v-model="message"></textarea>
             </div>
             <br>
 
@@ -43,6 +45,8 @@
             <br>
 
             <h1>Decrypt!</h1>
+
+            <button v-on:click="clearDecrypt()">Clear All</button>
             <div>
                 <label for="decryptPassphrase">Passphrase:</label>
                 <input type="password" id="decryptPassphrase" name="decryptPassphrase" required="required" v-model="decryptPassphrase">
@@ -92,11 +96,21 @@
         },
 
         methods: {
-            encrypt() {
-                this.encryptedMessage = encrypt(this.message, this.passphrase);
-                this.showEncryptedMessage = true;
+            encrypt () {
+
+                if (this.message.length >= 20 && this.message.length <= 60)
+                {
+                    if (this.passphrase.length >= 5 && this.passphrase.length <= 10) {
+                        this.encryptedMessage = encrypt(this.message, this.passphrase);
+                        this.showEncryptedMessage = true;
+                    } else {
+                        alert('Passphrase must be between 5 and 10 characters');
+                    }
+                } else {
+                    alert('Message must be between 20 and 60 characters');
+                }
             },
-            decrypt() {
+            decrypt () {
                 this.decryptedMessage = decrypt(this.decryptMessage, this.decryptPassphrase);
                 this.showDecryptedMessage = true;
             },
@@ -106,9 +120,23 @@
                 this.decryptSelected = false;
             }, 
             
-            showDecrypt() {
+            showDecrypt () {
                 this.encryptSelected = false;
                 this.decryptSelected = true;
+            },
+
+            clearEncrypt () {
+                this.message = '';
+                this.passphrase = '';
+                this.encryptedMessage = '';
+                this.showEncryptedMessage = false;
+            },
+
+            clearDecrypt () {
+                this.decryptMessage = '';
+                this.decryptedMessage = '';
+                this.decryptPassphrase = '';
+                this.showDecryptedMessage = false;
             }
         },
 
