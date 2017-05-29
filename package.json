@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "go": "npm run build && npm start"
   },
   "author": "Anthony Scinocco",
   "dependencies": {
@@ -15,6 +16,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-runtime": "^6.23.0",
     "css-loader": "^0.28.2",
+    "vigenere": "^1.0.2",
     "vigenere-cipher": "^1.0.0",
     "vue": "^2.3.3",
     "vue-loader": "^12.1.0",
